@@ -15,7 +15,7 @@
 # Heading
 Through testing with ubuntu 20.04 LTS the avahi mDNS was problematic or inconsistent. Testing Vyos 1.4 with its [mDNS repeater](https://docs.vyos.io/en/latest/configuration/service/mdns.html) option was more successful. Oddly enough enabling PIM which then turned on all of IGMP caused issues so disabling it allowed certain things to work. Using Ubiquitiy community [created containers](https://github.com/scyto/multicast-relay) was the most successful. IGMP & PIM was definately needed for this option. All were built in vSphere 6.7 and multihomed with portgroup vlans.
 
-Using photon 4: get image from github, user is root password is changeme, tdnf to update, install packages to keep it automatically updated? Pull image:
+Using photon 4: get image from github, user is root password is changeme(You can change password, then change it back to something more simpler if the pam password complexity thing is an issue), tdnf to update, install packages to keep it automatically updated? Pull image:
 `docker run -d --network=host --name mDNS --restart=always -e INTERFACES="eth1 eth0" scyto/multicast-relay`
 -d to daemonize(send to background), --network must be somehow briding interfaces of vm, name the vm, --restart will bring up container on host reboots, interfaces will be your vms interfaces, scyto/multicast-relay is the docker container name to pull from.
 
